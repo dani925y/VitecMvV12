@@ -1,0 +1,79 @@
+﻿@model IEnumerable<VitecMv_MVC.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .navBar {
+        background-color: rgb(77, 78, 76);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color: rgb(255, 255, 255);
+    }
+
+    .product {
+        background-color: #F3F3F3;
+        width: 100%;
+        height: 140px;
+        padding: 10px;
+    }
+
+        .product p {
+            height: 100%;
+            margin-top: 50%;
+        }
+
+        .product:hover {
+            background-color: #c9c9c9;
+        }
+
+    .link {
+        color: #000000;
+        text-decoration: none;
+    }
+
+        .link:hover {
+            color: black;
+            text-decoration: none;
+        }
+</style>
+
+<div class="navBar">
+    <div class="container">
+        Du er her: <b><a asp-area="" asp-controller="Home" asp-action="Index">Forside</a></b> > <b>Produkter</b>
+    </div>
+</div>
+<br />
+<div class="container">
+
+    @{ int count = 0; }
+    @foreach (var item in Model)
+    {
+        string description = item.Description;
+        string style = "background-color: #F3F3F3;";
+        if (description.Length > 110) { description = item.Description.Substring(0, 110) + "..."; }
+        if (count == 0) { style = "background-color: #F3F3F3;"; count++; }
+        else { style = "background-color: #BEDCE6;"; count = 0; }
+        <a class="link" asp-action="Details" asp-route-id="@item.ID">
+            <div class="row product" style="@style">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="@item.Image" width="100px" height="100px" />
+                        </div>
+                        <div class="col-md-8">
+                            <h3>@item.Name</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    @description
+                </div>
+                <div class="col-md-2">
+                    <div style="width: 80px; height: 30px; border: 2px solid black; padding-left: 8px; background: linear-gradient(rgb(255, 255, 255, 0.5), rgb(255, 255, 255, 0.5))">Se mere</div>
+                </div>
+            </div>
+        </a>
+    }
+</div>

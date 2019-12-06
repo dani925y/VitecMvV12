@@ -1,0 +1,28 @@
+﻿@model VitecMv_MVC.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div style="background-color: rgb(77, 78, 76); padding-top: 10px; padding-bottom: 10px; color: rgb(255, 255, 255);">
+    <div class="container">
+        Du er her: <b><a asp-area="" asp-controller="Home" asp-action="Index">Forside</a></b> > <b><a asp-area="" asp-controller="Products" asp-action="Index">Produkter</a></b> > <b>@Html.DisplayFor(model => model.Name)</b>
+    </div>
+</div>
+<br />
+
+<div class="container">
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
+
+
+    <img src="@Html.DisplayFor(model => model.Image)" width="200px" height="200px" />
+    <hr />
+
+    <div style="background-color: #F0F0F0;">
+        <div style="padding: 35px;">
+            @Html.Raw(Model.Description.Replace(Environment.NewLine, "<br/>"))
+            <br /><br />
+            @Html.DisplayNameFor(model => model.Price): @Html.DisplayFor(model => model.Price)
+        </div>
+    </div>
+</div>
